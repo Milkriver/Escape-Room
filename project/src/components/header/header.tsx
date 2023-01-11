@@ -1,5 +1,3 @@
-import Footer from "../../components/footer/footer";
-
 function Header(): JSX.Element {
   return (
     <header className="header">
