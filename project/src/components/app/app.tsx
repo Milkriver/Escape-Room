@@ -5,6 +5,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import BookingPage from '../../pages/booking-page/booking-page';
 import MainPage from '../../pages/main-page/main-page';
 import HistoryRouter from '../history-router/history-router';
+import ContactsPage from '../../pages/contacts-page/contacts-page';
 
 function App(): JSX.Element {
   return (
@@ -21,6 +22,10 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Login}
           element={<LoginPage />}
+        />
+        <Route
+          path={AppRoute.Contacts}
+          element={<ContactsPage />}
         />
       </Routes>
     </HistoryRouter>
