@@ -1,8 +1,10 @@
 import BookingForm from '../../components/booking-form/booking-form';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import { mockBookingSlots } from '../../mock/mock';
 
 function BookingPage(): JSX.Element {
+  const slots = mockBookingSlots;
   return (
     <div className='wrapper'>
       <Header />
@@ -24,7 +26,7 @@ function BookingPage(): JSX.Element {
               <div className='map'>
                 <div className='map__container'></div>
               </div>
-              <p className='booking-map__address'>Вы&nbsp;выбрали: наб. реки Карповки&nbsp;5, лит&nbsp;П, м. Петроградская</p>
+              <p className='booking-map__address'>{slots.locations[0].address}</p>
             </div>
           </div>
           <BookingForm />

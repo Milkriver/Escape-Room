@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import { AppRoute } from '../../const';
+import LoginPage from '../../pages/login-page/login-page';
 import BookingPage from '../../pages/booking-page/booking-page';
 import MainPage from '../../pages/main-page/main-page';
 import HistoryRouter from '../history-router/history-router';
@@ -16,6 +17,10 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Booking}
           element={<BookingPage />}
+        />
+        <Route
+          path={AppRoute.Login}
+          element={<LoginPage />}
         />
       </Routes>
     </HistoryRouter>

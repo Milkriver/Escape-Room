@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 
-function AuthPage(): JSX.Element {
+function LoginPage(): JSX.Element {
   return (
     <div className="wrapper">
       <Header/>
@@ -49,4 +49,4 @@ function AuthPage(): JSX.Element {
   );
 }
 
-export default AuthPage;
+export default LoginPage;
