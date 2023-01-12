@@ -5,5 +5,5 @@ export enum AppRoute {
     Booking = '/quest/:id/booking',
     Login = '/login',
     PageError = '*',
-    UserBooking = '/my-booking'
+    UserBooking = '/my-quests'
 }
