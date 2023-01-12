@@ -183,7 +183,7 @@ export const mockBookingSlots = {
         isAvailable: false
       },
       {
-        time: '20:00',
+        time: '21:00',
         isAvailable: true
       }
     ]
