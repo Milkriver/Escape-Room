@@ -189,3 +189,29 @@ export const mockBookingSlots = {
     ]
   }
 };
+
+export const mockUserBooking = [
+  {
+    date: 'today',
+    time: '14:00',
+    contactPerson: 'Oliver',
+    phone: '899911122233',
+    withChildren: true,
+    peopleCount: 3,
+    location: {
+      id: 1,
+      address: 'Набережная реки Карповки, 5П',
+      coords: [
+        59.968322
+      ]},
+    quest: {
+      id: 1,
+      title: 'Склеп',
+      previewImg: 'static/preview/preview-sklep.jpg',
+      level: 'easy',
+      type: 'adventures',
+      peopleMinMax: [
+        2
+      ]}
+  }
+];

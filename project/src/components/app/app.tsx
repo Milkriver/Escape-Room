@@ -6,6 +6,7 @@ import BookingPage from '../../pages/booking-page/booking-page';
 import MainPage from '../../pages/main-page/main-page';
 import HistoryRouter from '../history-router/history-router';
 import ContactsPage from '../../pages/contacts-page/contacts-page';
+import UserBookingPage from '../../pages/user-booking-page/user-booking-page';
 
 function App(): JSX.Element {
   return (
@@ -26,6 +27,10 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Contacts}
           element={<ContactsPage />}
+        />
+        <Route
+          path={AppRoute.UserBooking}
+          element={<UserBookingPage />}
         />
       </Routes>
     </HistoryRouter>
