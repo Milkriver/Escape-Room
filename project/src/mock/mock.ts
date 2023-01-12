@@ -113,3 +113,79 @@ export const mockQuests = [
     peopleMinMax: [5, 6],
   },
 ];
+
+export const mockBookingSlots = {
+  id: 1,
+  locations: [
+    {
+      id: 1,
+      address: 'пр. Большевиков, 18 лит. А, м. Дыбенко',
+      coords: [
+        59.90840521851865,
+        30.48297378898692
+      ]
+    }
+  ],
+  slots: {
+    today: [
+      {
+        time: '14:00',
+        isAvailable: true
+      },
+      {
+        time: '15:00',
+        isAvailable: true
+      },
+      {
+        time: '16:00',
+        isAvailable: true
+      },
+      {
+        time: '17:00',
+        isAvailable: true
+      },
+      {
+        time: '18:00',
+        isAvailable: true
+      },
+      {
+        time: '19:00',
+        isAvailable: true
+      },
+      {
+        time: '20:00',
+        isAvailable: false
+      }
+    ],
+    'tomorrow': [
+      {
+        time: '14:00',
+        isAvailable: false
+      },
+      {
+        time: '15:00',
+        isAvailable: true
+      },
+      {
+        time: '16:00',
+        isAvailable: true
+      },
+      {
+        time: '17:00',
+        isAvailable: false
+      },
+      {
+        time: '18:00',
+        isAvailable: true
+      },
+      {
+        time: '19:00',
+        isAvailable: false
+      },
+      {
+        time: '20:00',
+        isAvailable: true
+      }
+    ]
+  }
+};
