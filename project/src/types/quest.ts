@@ -12,6 +12,18 @@ export type IQuests = {
   quests: IQuest[];
 };
 
+export type IActiveQuest = {
+    id: number;
+    title: string;
+    description: string;
+    previewImg: string;
+    previewImgWebp: string;
+    coverImg: string;
+    coverImgWebp: string;
+    level: string;
+    type: string;
+    peopleMinMax: number[];
+}
 
 export type IUserBooking = {
   date: string;

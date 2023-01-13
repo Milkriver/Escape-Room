@@ -4,11 +4,16 @@ import { IQuest } from '../../types/quest';
 
 type IProps = {
   quest: IQuest;
+  onMouseEnter: (id: number | undefined) => void;
 };
-function QuestCard(props: IProps): JSX.Element {
-  const { id, title, level, previewImg, peopleMinMax } = props.quest;
+function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
+  const { id, title, level, previewImg, peopleMinMax } = quest;
+  const handleQuestClick = () => {
+    onMouseEnter(id);
+  };
+
   return (
-    <div className='quest-card'>
+    <Link className='quest-card' onClick={handleQuestClick} to={generatePath(AppRoute.Quest, { id: String(id) })}>
       <div className='quest-card__img'>
         <picture>
           {/* <source
@@ -45,7 +50,7 @@ function QuestCard(props: IProps): JSX.Element {
           </li>
         </ul>
       </div>
-    </div>
+    </Link>
   );
 }
 

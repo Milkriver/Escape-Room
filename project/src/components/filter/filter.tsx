@@ -1,12 +1,15 @@
-import { useState } from 'react';
 import { genres, levels } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeCurrentGenre, changeCurrentLevel } from '../../store/action';
 import { Genre, Level } from '../../types/quest';
 
 function Filter(): JSX.Element {
-  const [currentGenre, setCurrentGenre] = useState('all-quests');
-  const [currentLevel, setCurrentLevel] = useState('any');
-  const changeGenreHandler = (genre: string) => setCurrentGenre(genre);
-  const changeLevelHandler = (level: string) => setCurrentLevel(level);
+  const currentGenre = useAppSelector((state) => state.currentGenre);
+  const currentLevel = useAppSelector((state) => state.currentLevel);
+  const dispatch = useAppDispatch();
+
+  const changeGenreHandler = (genre: string) => dispatch(changeCurrentGenre(genre));
+  const changeLevelHandler = (level: string) => dispatch(changeCurrentLevel(level));
   const renderGenreList = (genre: Genre) => (
     <li className="filter__item" key={genre.name}>
       <input type="radio" name="type" id={genre.type} checked={currentGenre === genre.type} />
@@ -18,8 +21,8 @@ function Filter(): JSX.Element {
     </li>
   );
   const renderLevelList = (level: Level) => (
-    <li className="filter__item">
-      <input type="radio" name="level" id={level.name} checked={currentLevel === level.type}/>
+    <li className="filter__item" key={level.name}>
+      <input type="radio" name="level" id={level.name} checked={currentLevel === level.type} />
       <label className="filter__label" htmlFor={level.name} onClick={() => changeLevelHandler(level.type)}><span className="filter__label-text">{level.name}</span>
       </label>
     </li>
@@ -35,7 +38,7 @@ function Filter(): JSX.Element {
       <fieldset className="filter__section">
         <legend className="visually-hidden">Сложность</legend>
         <ul className="filter__list">
-          {levels.map((level)=> renderLevelList(level))}
+          {levels.map((level) => renderLevelList(level))}
         </ul>
       </fieldset>
     </form>

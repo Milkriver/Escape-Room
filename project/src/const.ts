@@ -14,6 +14,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Quests = '/quest',
+  Booking = '/reservation',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
@@ -72,7 +79,7 @@ export const levels = [
     name: 'Лёгкий'
   },
   {
-    type: 'middle',
+    type: 'medium',
     name: 'Средний'
   },
   {

@@ -64,7 +64,7 @@ export const mockQuests = [
     id: 7,
     title: 'Метро 2033',
     previewImg:
-      'https://grading.design.pages.academy:/static/quest/metro.jpg.jpg',
+      'https://grading.design.pages.academy:/static/quest/metro.jpg',
     previewImgWebp:
       'https://grading,design,pages,academy:/static/quest/metro,jpg.webp',
     level: 'medium',
