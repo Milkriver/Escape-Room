@@ -14,21 +14,36 @@ export type IQuests = {
 
 
 export type IUserBooking = {
-    date: string;
-    time: string;
-    contactPerson: string;
-    phone: string;
-    withChildren: boolean;
-    peopleCount: number;
-    location: {
-      id: number;
-      address: string;
-      coords: number[];};
-    quest: {
-      id: number;
-      title: string;
-      previewImg: string;
-      level: string;
-      type: string;
-      peopleMinMax: number[];};
-    };
+  date: string;
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  location: {
+    id: number;
+    address: string;
+    coords: number[];
+  };
+  quest: {
+    id: number;
+    title: string;
+    previewImg: string;
+    level: string;
+    type: string;
+    peopleMinMax: number[];
+  };
+};
+
+export type Genre = {
+  name: string;
+  type: string;
+  xlinkHref: string;
+  iconWidth: string;
+  iconHeight: string;
+}
+
+export type Level = {
+  type: string;
+  name: string;
+}
