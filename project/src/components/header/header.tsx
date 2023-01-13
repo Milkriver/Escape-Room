@@ -1,35 +1,35 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import Logo from '../logo/logo';
+
 function Header(): JSX.Element {
   return (
     <header className="header">
       <div className="container container--size-l">
-        <span className="logo header__logo">
-          <svg width="134" height="52" aria-hidden="true">
-            <use xlinkHref="#logo"></use>
-          </svg>
-        </span>
+        <Logo />
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <a className="link active" href="index.html">
+              <Link className="link active" to={AppRoute.Main}>
                 Квесты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="contacts.html">
+              <Link className="link" to={AppRoute.Contacts}>
                 Контакты
-              </a>
+              </Link>
             </li>
             <li className="main-nav__item">
-              <a className="link" href="my-quests.html">
+              <Link className="link" to={AppRoute.UserBooking}>
                 Мои бронирования
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
         <div className="header__side-nav">
-          <a className="btn btn--accent header__side-item" href="#">
+          <Link className="btn btn--accent header__side-item" to={AppRoute.Main}>
             Выйти
-          </a>
+          </Link>
           <a
             className="link header__side-item header__phone-link"
             href="tel:88003335599"

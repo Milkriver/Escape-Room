@@ -1,10 +1,12 @@
+import { generatePath, Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { IQuest } from '../../types/quest';
 
 type IProps = {
   quest: IQuest;
 };
 function QuestCard(props: IProps): JSX.Element {
-  const { title, level, previewImg, peopleMinMax } = props.quest;
+  const { id, title, level, previewImg, peopleMinMax } = props.quest;
   return (
     <div className='quest-card'>
       <div className='quest-card__img'>
@@ -24,9 +26,9 @@ function QuestCard(props: IProps): JSX.Element {
       </div>
       <div className='quest-card__content'>
         <div className='quest-card__info-wrapper'>
-          <a className='quest-card__link' href='quest.html'>
+          <Link className='quest-card__link' to={generatePath(AppRoute.Quest, { id: String(id) })}>
             {title}
-          </a>
+          </Link>
         </div>
         <ul className='tags quest-card__tags'>
           <li className='tags__item'>
