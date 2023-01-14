@@ -1,8 +1,8 @@
 import { AxiosInstance } from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { IActiveQuest, IQuest } from '../types/quest';
+import { IActiveQuest, IQuest, IUserBooking } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { loadActiveQuest, loadQuests, redirectToRoute, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
+import { loadActiveQuest, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData, UserData } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
@@ -36,6 +36,19 @@ export const fetchActiveQuestAction = createAsyncThunk<void | undefined, number,
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.PageError));
     }
+  },
+);
+
+export const fetchUserBookingAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'user/fetchUserBooking',
+  async (_arg, { dispatch, extra: api }) => {
+    const { data } = await api.get<IUserBooking[]>(APIRoute.Booking);
+    dispatch(loadUserBookings(data));
   },
 );
 
@@ -91,3 +104,5 @@ export const clearErrorAction = createAsyncThunk(
     );
   },
 );
+
+

@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { mockUserBooking } from '../../mock/mock';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchUserBookingAction } from '../../store/api-actions';
 import { IUserBooking } from '../../types/quest';
 
 const renderUserBooking = (booking: IUserBooking) => (
@@ -37,6 +39,11 @@ const renderUserBooking = (booking: IUserBooking) => (
 
 
 function UserBookingPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const userBooking = useAppSelector((state) => state.userBooking);
+  useEffect(() => {
+    dispatch(fetchUserBookingAction());
+  }, [dispatch]);
   return (
     <div className="wrapper">
       <Header/>
@@ -52,7 +59,7 @@ function UserBookingPage(): JSX.Element {
             <h1 className="title title--size-m page-content__title">Мои бронирования</h1>
           </div>
           <div className="cards-grid">
-            {mockUserBooking.map((element) => renderUserBooking(element))}
+            {userBooking.map((element) => renderUserBooking(element))}
           </div>
         </div>
       </main>
