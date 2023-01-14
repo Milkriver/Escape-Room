@@ -9,8 +9,18 @@ import ContactsPage from '../../pages/contacts-page/contacts-page';
 import UserBookingPage from '../../pages/user-booking-page/user-booking-page';
 import PrivateRoute from '../private-route/private-route';
 import QuestPage from '../../pages/quest-page/quest-page';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isQuestsDataLoading = useAppSelector((state) => state.isQuestsDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isQuestsDataLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -22,7 +32,7 @@ function App(): JSX.Element {
           path={AppRoute.Booking}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={authorizationStatus}
             >
               <BookingPage />
             </PrivateRoute>

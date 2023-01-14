@@ -24,6 +24,8 @@ export enum APIRoute {
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const genres = [
   {
     name: 'Все квесты',
