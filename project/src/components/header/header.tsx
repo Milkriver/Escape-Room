@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 import Logo from '../logo/logo';
 
 function Header(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
   return (
     <header className="header">
       <div className="container container--size-l">
@@ -10,32 +14,42 @@ function Header(): JSX.Element {
         <nav className="main-nav header__main-nav">
           <ul className="main-nav__list">
             <li className="main-nav__item">
-              <Link className="link active" to={AppRoute.Main}>
-                Квесты
-              </Link>
+              <Link className="link active" to={AppRoute.Main}>Квесты</Link>
             </li>
             <li className="main-nav__item">
-              <Link className="link" to={AppRoute.Contacts}>
-                Контакты
-              </Link>
+              <Link className="link" to={AppRoute.Contacts}>Контакты</Link>
             </li>
-            <li className="main-nav__item">
-              <Link className="link" to={AppRoute.UserBooking}>
-                Мои бронирования
-              </Link>
-            </li>
+            {
+              (authorizationStatus === AuthorizationStatus.Auth)
+              &&
+              <li className="main-nav__item">
+                <Link className="link" to={AppRoute.UserBooking}>Мои бронирования</Link>
+              </li>
+            }
           </ul>
         </nav>
         <div className="header__side-nav">
-          <Link className="btn btn--accent header__side-item" to={AppRoute.Main}>
-            Выйти
-          </Link>
-          <a
+          {
+            (authorizationStatus === AuthorizationStatus.Auth)
+              ?
+              <Link className="btn btn--accent header__side-item" to={AppRoute.Main} onClick={(evt) => {
+                evt.preventDefault();
+                dispatch(logoutAction());
+              }}
+              >
+                Выйти
+              </Link>
+              :
+              <Link className="btn btn--accent header__side-item" to={AppRoute.Login}>
+                Вход
+              </Link>
+          }
+          <Link
             className="link header__side-item header__phone-link"
-            href="tel:88003335599"
+            to="tel:88003335599"
           >
             8 (000) 111-11-11
-          </a>
+          </Link>
         </div>
       </div>
     </header>

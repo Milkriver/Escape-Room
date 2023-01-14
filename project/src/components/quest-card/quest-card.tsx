@@ -26,9 +26,7 @@ function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
       </div>
       <div className='quest-card__content'>
         <div className='quest-card__info-wrapper'>
-          <Link className='quest-card__link' to={generatePath(AppRoute.Quest, { id: String(id) })}>
-            {title}
-          </Link>
+          <div className='quest-card__link'>{title}</div>
         </div>
         <ul className='tags quest-card__tags'>
           <li className='tags__item'>

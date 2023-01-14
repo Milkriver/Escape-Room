@@ -2,8 +2,8 @@ import { AxiosInstance } from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { IActiveQuest, IQuest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { loadActiveQuest, loadQuests, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { loadActiveQuest, loadQuests, redirectToRoute, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
+import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData, UserData } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import {store} from './';
@@ -34,8 +34,7 @@ export const fetchActiveQuestAction = createAsyncThunk<void | undefined, number,
       const { data } = await api.get<IActiveQuest>(`${APIRoute.Quests}/${questId}`);
       dispatch(loadActiveQuest(data));
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
+      dispatch(redirectToRoute(AppRoute.PageError));
     }
   },
 );
@@ -66,6 +65,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.UserBooking));
   },
 );
 

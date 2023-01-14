@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { mockBookingSlots } from '../../mock/mock';
 
 type ITimeSlot = {
@@ -42,7 +43,7 @@ function BookingForm(): JSX.Element {
         <div className='custom-input booking-form__input'>
           <label className='custom-input__label' htmlFor='name'>Ваше имя</label>
           <input type='text' id='name' name='name' placeholder='Имя'
-            // pattern='[А-Яа-яЁёA-Za-z'- ]{1,}'
+            pattern='[А-Яа-яЁёA-Za-z]{1,}'
             required
           />
         </div>
@@ -73,7 +74,7 @@ function BookingForm(): JSX.Element {
           </svg>
         </span>
         <span className='custom-checkbox__label'>Я&nbsp;согласен с
-          <a className='link link--active-silver link--underlined'>правилами обработки персональных данных</a>&nbsp;и пользовательским соглашением
+          <Link className='link link--active-silver link--underlined' to="#">правилами обработки персональных данных</Link>&nbsp;и пользовательским соглашением
         </span>
       </label>
     </form>

@@ -4,7 +4,7 @@ import { mockUserBooking } from '../../mock/mock';
 import { IUserBooking } from '../../types/quest';
 
 const renderUserBooking = (booking: IUserBooking) => (
-  <div className="quest-card">
+  <div className="quest-card" key={`${booking.quest.id}_${booking.date}_${booking.time}`}>
     <div className="quest-card__img">
       <img src="img/content/maniac/maniac-size-s.jpg" width="344" height="232" alt={booking.quest.title} />
     </div>
@@ -39,7 +39,7 @@ const renderUserBooking = (booking: IUserBooking) => (
 function UserBookingPage(): JSX.Element {
   return (
     <div className="wrapper">
-      <Header />
+      <Header/>
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>

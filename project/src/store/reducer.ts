@@ -1,7 +1,7 @@
 import { AuthorizationStatus } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { IActiveQuest, IQuest } from '../types/quest';
-import { changeCurrentGenre, changeCurrentLevel, loadActiveQuest, loadQuests, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
+import { IActiveQuest, IQuest, IUserBooking } from '../types/quest';
+import { changeCurrentGenre, changeCurrentLevel, loadActiveQuest, loadQuests, loadUserBookings, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
 
 type InitialState = {
   currentGenre: string;
@@ -11,6 +11,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   isQuestsDataLoading: boolean;
   error: string | null;
+  userBooking: IUserBooking[];
 };
 
 const initialState: InitialState = {
@@ -21,6 +22,7 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isQuestsDataLoading: false,
   error: null,
+  userBooking: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -45,6 +47,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setQuestsDataLoadingStatus, (state, action) => {
       state.isQuestsDataLoading = action.payload;
+    })
+    .addCase(loadUserBookings, (state, action) => {
+      state.userBooking = action.payload;
     });
 
 });
