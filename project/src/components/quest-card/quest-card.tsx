@@ -16,13 +16,8 @@ function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
     <Link className='quest-card' onClick={handleQuestClick} to={generatePath(AppRoute.Quest, { id: String(id) })}>
       <div className='quest-card__img'>
         <picture>
-          {/* <source
-            type='image/webp'
-            srcSet='img/content/crypt/crypt-size-s.webp, img/content/crypt/crypt-size-s@2x.webp 2x'
-          /> */}
           <img
             src={previewImg}
-            // srcSet='img/content/crypt/crypt-size-s@2x.jpg 2x'
             width='344'
             height='232'
             alt={title}
