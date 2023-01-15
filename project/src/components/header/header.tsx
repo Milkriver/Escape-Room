@@ -9,9 +9,9 @@ function Header(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const activeTab = useAppSelector((state) => state.activeTab);
   const dispatch = useAppDispatch();
-  const handleQuests = () => dispatch(setActiveTab('Quests'));
-  const handleContacts = () => dispatch(setActiveTab('Contacts'));
-  const handleUserBooking = () => dispatch(setActiveTab('User-booking'));
+  const handleQuests = () => dispatch(setActiveTab(TABS.QUESTS));
+  const handleContacts = () => dispatch(setActiveTab(TABS.CONTACTS));
+  const handleUserBooking = () => dispatch(setActiveTab(TABS.USER_BOOKING));
 
   return (
     <header className="header">

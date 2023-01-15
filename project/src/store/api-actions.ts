@@ -2,8 +2,8 @@ import { AxiosInstance } from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import { IActiveQuest, IQuest, IUserBooking } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { loadActiveQuest, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
-import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
+import { loadActiveQuest, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
+import { APIRoute, AppRoute, AuthorizationStatus, TABS, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData, UserData } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
 import {store} from './';
@@ -78,6 +78,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(setActiveTab(TABS.USER_BOOKING));
     dispatch(redirectToRoute(AppRoute.UserBooking));
   },
 );
