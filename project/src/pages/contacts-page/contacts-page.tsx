@@ -1,5 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import Map from '../../components/map/map';
+import { QUEST_CONTACTS_COORDINATES } from '../../const';
 
 function ContactsPage(): JSX.Element {
   return (
@@ -45,7 +47,7 @@ function ContactsPage(): JSX.Element {
             </dl>
             <div className="contacts__map">
               <div className="map">
-                <div className="map__container"></div>
+                <Map coordinates = {QUEST_CONTACTS_COORDINATES}/>
               </div>
             </div>
           </div>

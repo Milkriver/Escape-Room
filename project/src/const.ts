@@ -21,10 +21,18 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
+export const QUEST_CONTACTS_COORDINATES = {
+  lat: 59.90840521851865,
+  long: 30.48297378898692
+};
+
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const URL_MARKER_DEFAULT = 'img/svg/pin-default.svg';
+export const URL_MARKER_CURRENT = 'img/svg/pin-active.svg';
 
 export const genres = [
   {
