@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking } from '../types/quest';
+import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking, IUserBookingRequest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
 import { loadActiveQuest, loadQuestBooking, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus, TABS, TIMEOUT_SHOW_ERROR } from '../const';
@@ -68,6 +68,22 @@ export const fetchUserBookingAction = createAsyncThunk<void, undefined, {
   },
 );
 
+export const addBookingAction = createAsyncThunk<void, IUserBookingRequest, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >(
+    'quest/addNewBooking',
+    async (request, { dispatch, extra: api }) => {
+      const { questId } = request;
+      await api.post(`${APIRoute.Quests}/${questId}/booking`, request);
+      dispatch(fetchUserBookingAction());
+      dispatch(setActiveTab(TABS.USER_BOOKING));
+      dispatch(redirectToRoute(AppRoute.UserBooking));
+    },
+  );
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -94,6 +110,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(fetchUserBookingAction());
     dispatch(setActiveTab(TABS.USER_BOOKING));
     dispatch(redirectToRoute(AppRoute.UserBooking));
   },

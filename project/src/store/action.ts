@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AppRoute, AuthorizationStatus } from '../const';
-import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking } from '../types/quest';
+import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking, IUserBookingRequest } from '../types/quest';
 
 export const changeCurrentGenre = createAction<string>('quest/changeCurrentGenre');
 export const changeCurrentLevel = createAction<string>('quest/changeCurrentLevel');
@@ -13,3 +13,4 @@ export const redirectToRoute = createAction<AppRoute>('quest/redirectToRoute');
 export const loadUserBookings = createAction<IUserBooking[]>('user/loadUserBooking');
 export const setActiveTab = createAction<string>('logic/setActiveTab');
 export const loadQuestBooking = createAction<IQuestBookingSlots>('quest/loadQuestBooking');
+export const setQuestBooking = createAction<IUserBookingRequest>('quest/setQuestBooking');

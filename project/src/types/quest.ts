@@ -47,6 +47,17 @@ export type IUserBooking = {
   };
 };
 
+export type IUserBookingRequest = {
+    date: string;
+    time: string;
+    contactPerson: string;
+    phone: string;
+    withChildren: boolean;
+    peopleCount: number;
+    locationId: number;
+    questId: number;
+};
+
 export type Genre = {
   name: string;
   type: string;
