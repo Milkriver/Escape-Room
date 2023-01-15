@@ -8,9 +8,7 @@ type IProps = {
 };
 function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
   const { id, title, level, previewImg, peopleMinMax } = quest;
-  const handleQuestClick = () => {
-    onMouseEnter(id);
-  };
+  const handleQuestClick = () => onMouseEnter(id);
 
   return (
     <Link className='quest-card' onClick={handleQuestClick} to={generatePath(AppRoute.Quest, { id: String(id) })}>

@@ -2,10 +2,15 @@ import { generatePath, Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchQuestBookingAction } from '../../store/api-actions';
 
 function QuestPage(): JSX.Element {
   const quest = useAppSelector((state) => state.activeQuest);
+  const dispatch = useAppDispatch();
+  const handleBookingSlots = () => {
+    dispatch(fetchQuestBookingAction(quest?.id as number));
+  };
   return (
     <div className="wrapper">
       <Header />
@@ -33,7 +38,13 @@ function QuestPage(): JSX.Element {
               </li>
             </ul>
             <p className="quest-page__description">{quest?.description}</p>
-            <Link className="btn btn--accent btn--cta quest-page__btn" to={generatePath(AppRoute.Booking, { id: String(quest?.id) })}>Забронировать</Link>
+            <Link
+              className="btn btn--accent btn--cta quest-page__btn"
+              onClick={handleBookingSlots}
+              to={generatePath(AppRoute.Booking, { id: String(quest?.id) })}
+            >
+              Забронировать
+            </Link>
           </div>
         </div>
       </main>

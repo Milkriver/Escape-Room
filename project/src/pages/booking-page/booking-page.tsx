@@ -1,10 +1,11 @@
 import BookingForm from '../../components/booking-form/booking-form';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import { mockBookingSlots } from '../../mock/mock';
+import { useAppSelector } from '../../hooks';
 
 function BookingPage(): JSX.Element {
-  const slots = mockBookingSlots;
+  const activeQuest = useAppSelector((state) => state.activeQuest);
+  const questBookingSlots = useAppSelector((state) => state.questBooking);
   return (
     <div className='wrapper'>
       <Header />
@@ -19,14 +20,14 @@ function BookingPage(): JSX.Element {
           <div className='page-content__title-wrapper'>
             <h1 className='subtitle subtitle--size-l page-content__subtitle'>Бронирование квеста
             </h1>
-            <p className='title title--size-m title--uppercase page-content__title'>Маньяк</p>
+            <p className='title title--size-m title--uppercase page-content__title'>{activeQuest?.title}</p>
           </div>
           <div className='page-content__item'>
             <div className='booking-map'>
               <div className='map'>
                 <div className='map__container'></div>
               </div>
-              <p className='booking-map__address'>{slots.locations[0].address}</p>
+              <p className='booking-map__address'>{questBookingSlots?.locations[0].address}</p>
             </div>
           </div>
           <BookingForm />

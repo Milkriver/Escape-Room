@@ -59,3 +59,23 @@ export type Level = {
   type: string;
   name: string;
 }
+
+export type ISlot = {
+  time: string;
+  isAvailable: boolean;
+};
+
+export type IQuestBookingSlots = {
+  id: number;
+  locations: [
+    {
+      id: number;
+      address: string;
+      coords: number[];
+    }
+  ];
+  slots: {
+    today: ISlot[];
+    tomorrow: ISlot[];
+  };
+};

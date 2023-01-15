@@ -1,8 +1,8 @@
 import { AxiosInstance } from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import { IActiveQuest, IQuest, IUserBooking } from '../types/quest';
+import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
-import { loadActiveQuest, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
+import { loadActiveQuest, loadQuestBooking, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus, TABS, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData, UserData } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
@@ -33,6 +33,22 @@ export const fetchActiveQuestAction = createAsyncThunk<void | undefined, number,
     try {
       const { data } = await api.get<IActiveQuest>(`${APIRoute.Quests}/${questId}`);
       dispatch(loadActiveQuest(data));
+    } catch (error) {
+      dispatch(redirectToRoute(AppRoute.PageError));
+    }
+  },
+);
+
+export const fetchQuestBookingAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'quest/fetchQuestBooking',
+  async (questId, { dispatch, extra: api }) => {
+    try {
+      const { data } = await api.get<IQuestBookingSlots>(`${APIRoute.Quests}/${questId}/booking`);
+      dispatch(loadQuestBooking(data));
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.PageError));
     }

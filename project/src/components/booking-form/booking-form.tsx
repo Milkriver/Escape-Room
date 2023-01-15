@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { mockBookingSlots } from '../../mock/mock';
+import { useAppSelector } from '../../hooks';
 
 type ITimeSlot = {
   time: string;
@@ -8,15 +8,16 @@ type ITimeSlot = {
 
 
 function BookingForm(): JSX.Element {
-  const slots = mockBookingSlots;
+  const slots = useAppSelector((state) => state.questBooking);
   const renderTimeSlot = (element: ITimeSlot) => (
-    <label className='custom-radio booking-form__date'>
+    <label className='custom-radio booking-form__date' key={element.time}>
       <input
         type='radio'
         id={element.time}
         name='date'
         required
         disabled={!element.isAvailable}
+        readOnly
       />
       <span className='custom-radio__label'>{element.time}</span>
     </label>
@@ -28,13 +29,13 @@ function BookingForm(): JSX.Element {
         <fieldset className='booking-form__date-section'>
           <legend className='booking-form__date-title'>Сегодня</legend>
           <div className='booking-form__date-inner-wrapper'>
-            {slots.slots.today.map((element) => renderTimeSlot(element))}
+            {slots?.slots.today.map((element) => renderTimeSlot(element))}
           </div>
         </fieldset>
         <fieldset className='booking-form__date-section'>
           <legend className='booking-form__date-title'>Завтра</legend>
           <div className='booking-form__date-inner-wrapper'>
-            {slots.slots.tomorrow.map((element) => renderTimeSlot(element))}
+            {slots?.slots.tomorrow.map((element) => renderTimeSlot(element))}
           </div>
         </fieldset>
       </fieldset>
