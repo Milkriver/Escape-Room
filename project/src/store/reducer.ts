@@ -1,7 +1,7 @@
-import { AuthorizationStatus } from './../const';
+import { AuthorizationStatus, TABS } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { IActiveQuest, IQuest, IUserBooking } from '../types/quest';
-import { changeCurrentGenre, changeCurrentLevel, loadActiveQuest, loadQuests, loadUserBookings, requireAuthorization, setError, setQuestsDataLoadingStatus } from './action';
+import { changeCurrentGenre, changeCurrentLevel, loadActiveQuest, loadQuests, loadUserBookings, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
 
 type InitialState = {
   currentGenre: string;
@@ -12,6 +12,7 @@ type InitialState = {
   isQuestsDataLoading: boolean;
   error: string | null;
   userBooking: IUserBooking[];
+  activeTab: string;
 };
 
 const initialState: InitialState = {
@@ -23,6 +24,7 @@ const initialState: InitialState = {
   isQuestsDataLoading: false,
   error: null,
   userBooking: [],
+  activeTab: TABS.CONTACTS,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -50,6 +52,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadUserBookings, (state, action) => {
       state.userBooking = action.payload;
+    })
+    .addCase(setActiveTab, (state, action) => {
+      state.activeTab = action.payload;
     });
 
 });

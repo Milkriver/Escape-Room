@@ -26,6 +26,12 @@ export const QUEST_CONTACTS_COORDINATES = {
   long: 30.48297378898692
 };
 
+export const TABS = {
+  QUESTS: 'Quests',
+  CONTACTS: 'Contacts',
+  USER_BOOKING: 'User-booking',
+};
+
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 

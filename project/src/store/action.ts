@@ -11,3 +11,4 @@ export const setError = createAction<string | null>('quest/setError');
 export const setQuestsDataLoadingStatus = createAction<boolean>('quest/setQuestsDataLoadingStatus');
 export const redirectToRoute = createAction<AppRoute>('quest/redirectToRoute');
 export const loadUserBookings = createAction<IUserBooking[]>('user/loadUserBooking');
+export const setActiveTab = createAction<string>('logic/setActiveTab');
