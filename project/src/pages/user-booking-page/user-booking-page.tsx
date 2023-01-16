@@ -12,9 +12,7 @@ const renderUserBooking = (booking: IUserBooking) => (
     </div>
     <div className="quest-card__content">
       <div className="quest-card__info-wrapper">
-        <a className="quest-card__link" href="quest.html">
-          {booking.quest.title}
-        </a>
+        <div className="quest-card__link">{booking.quest.title}</div>
         <span className="quest-card__info">
           [{booking.date}, {booking.time}. {booking.location.address}]
         </span>

@@ -21,10 +21,7 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-export const QUEST_CONTACTS_COORDINATES = {
-  lat: 59.90840521851865,
-  long: 30.48297378898692
-};
+export const QUEST_CONTACTS_COORDINATES = [59.90840521851865, 30.48297378898692];
 
 export const TABS = {
   QUESTS: 'Quests',
@@ -103,3 +100,10 @@ export const levels = [
     name: 'Сложный'
   },
 ];
+
+export const QUEST_LEVELS = {
+  any: 'Любой',
+  easy: 'Лёгкий',
+  medium: 'Средний',
+  hard: 'Сложный'
+};
