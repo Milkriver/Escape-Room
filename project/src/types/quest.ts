@@ -27,6 +27,7 @@ export type IActiveQuest = {
 
 export type IUserBooking = {
   date: string;
+  id: number;
   time: string;
   contactPerson: string;
   phone: string;

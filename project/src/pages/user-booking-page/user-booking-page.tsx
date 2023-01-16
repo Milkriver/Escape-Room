@@ -2,39 +2,8 @@ import { useEffect } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchUserBookingAction } from '../../store/api-actions';
+import { deleteBookingAction, fetchUserBookingAction } from '../../store/api-actions';
 import { IUserBooking } from '../../types/quest';
-
-const renderUserBooking = (booking: IUserBooking) => (
-  <div className="quest-card" key={`${booking.quest.id}_${booking.date}_${booking.time}`}>
-    <div className="quest-card__img">
-      <img src="img/content/maniac/maniac-size-s.jpg" width="344" height="232" alt={booking.quest.title} />
-    </div>
-    <div className="quest-card__content">
-      <div className="quest-card__info-wrapper">
-        <div className="quest-card__link">{booking.quest.title}</div>
-        <span className="quest-card__info">
-          [{booking.date}, {booking.time}. {booking.location.address}]
-        </span>
-      </div>
-      <ul className="tags quest-card__tags">
-        <li className="tags__item">
-          <svg width="11" height="14" aria-hidden="true">
-            <use xlinkHref="#icon-person"></use>
-          </svg> {booking.quest.peopleMinMax[0]}&nbsp;{booking.quest.peopleMinMax[1]}чел
-        </li>
-        <li className="tags__item">
-          <svg width="14" height="14" aria-hidden="true">
-            <use xlinkHref="#icon-level"></use>
-          </svg>
-          {booking.quest.level}
-        </li>
-      </ul>
-      <button className="btn btn--accent btn--secondary quest-card__btn" type="button">Отменить</button>
-    </div>
-  </div>
-);
-
 
 function UserBookingPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,9 +11,45 @@ function UserBookingPage(): JSX.Element {
   useEffect(() => {
     dispatch(fetchUserBookingAction());
   }, [dispatch]);
+  const onClickDeleteBooking = (id: number) => dispatch(deleteBookingAction(id));
+  const renderUserBooking = (booking: IUserBooking) => (
+    <div className="quest-card" key={`${booking.quest.id}_${booking.date}_${booking.time}`}>
+      <div className="quest-card__img">
+        <img src="img/content/maniac/maniac-size-s.jpg" width="344" height="232" alt={booking.quest.title} />
+      </div>
+      <div className="quest-card__content">
+        <div className="quest-card__info-wrapper">
+          <div className="quest-card__link">{booking.quest.title}</div>
+          <span className="quest-card__info">
+            [{booking.date}, {booking.time}. {booking.location.address}]
+          </span>
+        </div>
+        <ul className="tags quest-card__tags">
+          <li className="tags__item">
+            <svg width="11" height="14" aria-hidden="true">
+              <use xlinkHref="#icon-person"></use>
+            </svg> {booking.quest.peopleMinMax[0]}&nbsp;{booking.quest.peopleMinMax[1]}чел
+          </li>
+          <li className="tags__item">
+            <svg width="14" height="14" aria-hidden="true">
+              <use xlinkHref="#icon-level"></use>
+            </svg>
+            {booking.quest.level}
+          </li>
+        </ul>
+        <button
+          className="btn btn--accent btn--secondary quest-card__btn"
+          type="button"
+          onClick={() => {onClickDeleteBooking(booking.id);}}
+        >Отменить
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="wrapper">
-      <Header/>
+      <Header />
       <main className="page-content decorated-page">
         <div className="decorated-page__decor" aria-hidden="true">
           <picture>

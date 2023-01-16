@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IActiveQuest, IQuest, IQuestBookingSlots, IUserBooking, IUserBookingRequest } from '../types/quest';
 import { AppDispatch, State } from '../types/state';
 import { loadActiveQuest, loadQuestBooking, loadQuests, loadUserBookings, redirectToRoute, requireAuthorization, setActiveTab, setError, setQuestsDataLoadingStatus } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus, TABS, TIMEOUT_SHOW_ERROR } from '../const';
 import { AuthData, UserData } from '../types/user';
 import { dropToken, saveToken } from '../services/token';
-import {store} from './';
+import { store } from './';
 
 export const fetchQuestsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -14,9 +14,9 @@ export const fetchQuestsAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'data/fetchQuests',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     dispatch(setQuestsDataLoadingStatus(true));
-    const {data} = await api.get<IQuest[]>(APIRoute.Quests);
+    const { data } = await api.get<IQuest[]>(APIRoute.Quests);
     dispatch(setQuestsDataLoadingStatus(false));
     dispatch(loadQuests(data));
   },
@@ -69,20 +69,20 @@ export const fetchUserBookingAction = createAsyncThunk<void, undefined, {
 );
 
 export const addBookingAction = createAsyncThunk<void, IUserBookingRequest, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }
-  >(
-    'quest/addNewBooking',
-    async (request, { dispatch, extra: api }) => {
-      const { questId } = request;
-      await api.post(`${APIRoute.Quests}/${questId}/booking`, request);
-      dispatch(fetchUserBookingAction());
-      dispatch(setActiveTab(TABS.USER_BOOKING));
-      dispatch(redirectToRoute(AppRoute.UserBooking));
-    },
-  );
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}
+>(
+  'quest/addNewBooking',
+  async (request, { dispatch, extra: api }) => {
+    const { questId } = request;
+    await api.post(`${APIRoute.Quests}/${questId}/booking`, request);
+    dispatch(fetchUserBookingAction());
+    dispatch(setActiveTab(TABS.USER_BOOKING));
+    dispatch(redirectToRoute(AppRoute.UserBooking));
+  },
+);
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -90,7 +90,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/checkAuth',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     try {
       await api.get(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
@@ -106,8 +106,8 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async ({email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+  async ({ email, password }, { dispatch, extra: api }) => {
+    const { data: { token } } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(fetchUserBookingAction());
@@ -122,7 +122,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance;
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
@@ -136,6 +136,18 @@ export const clearErrorAction = createAsyncThunk(
       () => store.dispatch(setError(null)),
       TIMEOUT_SHOW_ERROR,
     );
+  },
+);
+
+export const deleteBookingAction = createAsyncThunk<void, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/deleteBooking',
+  async (reservationId, { dispatch, extra: api }) => {
+    await api.delete(`${APIRoute.Booking}/${reservationId}`);
+    dispatch(fetchUserBookingAction());
   },
 );
 
