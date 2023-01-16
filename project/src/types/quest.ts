@@ -54,9 +54,9 @@ export type IUserBookingRequest = {
     contactPerson: string;
     phone: string;
     withChildren: boolean;
-    peopleCount: number | undefined;
-    locationId: number | undefined;
-    questId: number | undefined;
+    peopleCount: number;
+    locationId: number;
+    questId: number;
 };
 
 export type Genre = {
