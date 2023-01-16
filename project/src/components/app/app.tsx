@@ -11,6 +11,7 @@ import PrivateRoute from '../private-route/private-route';
 import QuestPage from '../../pages/quest-page/quest-page';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -60,7 +61,10 @@ function App(): JSX.Element {
           path={AppRoute.Quest}
           element={<QuestPage />}
         />
-
+        <Route
+          path="*"
+          element={<NotFoundPage />}
+        />
       </Routes>
     </HistoryRouter>
   );

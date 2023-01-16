@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 
-function NotFoundScreen(): JSX.Element {
+function NotFoundPage(): JSX.Element {
   return (
     <div className='wrapper'>
       <Header />
@@ -13,5 +13,5 @@ function NotFoundScreen(): JSX.Element {
   );
 }
 
-export default NotFoundScreen;
+export default NotFoundPage;
 
