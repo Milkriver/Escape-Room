@@ -21,7 +21,7 @@ const renderUserBooking = (booking: IUserBooking) => (
         <li className="tags__item">
           <svg width="11" height="14" aria-hidden="true">
             <use xlinkHref="#icon-person"></use>
-          </svg> {booking.quest.peopleMinMax}&nbsp;чел
+          </svg> {booking.quest.peopleMinMax[0]}&nbsp;{booking.quest.peopleMinMax[1]}чел
         </li>
         <li className="tags__item">
           <svg width="14" height="14" aria-hidden="true">

@@ -2,18 +2,18 @@ import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { addBookingAction } from '../../store/api-actions';
+import { IUserBookingRequest } from '../../types/quest';
 
 type ITimeSlot = {
   time: string;
   isAvailable: boolean;
 };
 
-
 function BookingForm(): JSX.Element {
   const slots = useAppSelector((state) => state.questBooking);
   const [person, setPerson] = useState('');
   const [phone, setPhone] = useState('');
-  const [, setPeopleCount] = useState(1);
+  const [peopleCount, setPeopleCount] = useState(1);
   const [withChildren, setWithChildren] = useState(false);
   const [time, setTime] = useState('');
   const [day, setDay] = useState('');
@@ -37,19 +37,19 @@ function BookingForm(): JSX.Element {
   //   locationId: 1,
   //   questId: 4
   // };
-  const request2 = {
+  const request: IUserBookingRequest = {
     date: day,
     time: time,
     contactPerson: person,
     phone: phone,
     withChildren: withChildren,
-    peopleCount: 3,
-    locationId: 1,
-    questId: 3
+    peopleCount: peopleCount,
+    locationId: slots?.locations[0].id,
+    questId: slots?.id
   };
   const onFormClick = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(addBookingAction(request2));
+    dispatch(addBookingAction(request));
   };
   const renderTimeSlot = (element: ITimeSlot, weekDay: string) => (
     <label className='custom-radio booking-form__date' key={element.time} id={weekDay}>
