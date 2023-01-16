@@ -4,6 +4,7 @@ import Header from '../../components/header/header';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteBookingAction, fetchUserBookingAction } from '../../store/api-actions';
 import { IUserBooking } from '../../types/quest';
+import { adaptQuestLevel } from '../../utils';
 
 function UserBookingPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -34,7 +35,7 @@ function UserBookingPage(): JSX.Element {
             <svg width="14" height="14" aria-hidden="true">
               <use xlinkHref="#icon-level"></use>
             </svg>
-            {booking.quest.level}
+            { adaptQuestLevel(booking.quest.level)}
           </li>
         </ul>
         <button

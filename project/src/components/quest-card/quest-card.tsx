@@ -1,6 +1,7 @@
 import { generatePath, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { IQuest } from '../../types/quest';
+import { adaptQuestLevel } from '../../utils';
 
 type IProps = {
   quest: IQuest;
@@ -9,7 +10,6 @@ type IProps = {
 function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
   const { id, title, level, previewImg, peopleMinMax } = quest;
   const handleQuestClick = () => onMouseEnter(id);
-
   return (
     <Link className='quest-card' onClick={handleQuestClick} to={generatePath(AppRoute.Quest, { id: String(id) })}>
       <div className='quest-card__img'>
@@ -37,7 +37,7 @@ function QuestCard({ quest, onMouseEnter }: IProps): JSX.Element {
             <svg width='14' height='14' aria-hidden='true'>
               <use xlinkHref='#icon-level'></use>
             </svg>
-            Сложный{level}
+            {adaptQuestLevel(level)}
           </li>
         </ul>
       </div>

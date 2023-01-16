@@ -19,7 +19,7 @@ function BookingForm(): JSX.Element {
   const onPersonChange = (event: React.ChangeEvent<HTMLInputElement>) => setPerson(event.currentTarget.value);
   const onPhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => setPhone(event.currentTarget.value);
   const onPeopleCountChange = (event: React.ChangeEvent<HTMLInputElement>) => setPeopleCount(Number(event.currentTarget.value));
-  const onWithChildrenClick = (event: React.ReactEventHandler<HTMLInputElement>) => setWithChildren(!withChildren);
+  const onWithChildrenClick = () => setWithChildren(!withChildren);
   function onTimeChange(event: React.ChangeEvent<HTMLInputElement>) {
     setTime(event.currentTarget.value);
     setDay(event.currentTarget.id);
@@ -83,7 +83,7 @@ function BookingForm(): JSX.Element {
           <input type='number' id='person' name='person' placeholder='Количество участников' required onChange={onPeopleCountChange}/>
         </div>
         <label className='custom-checkbox booking-form__checkbox booking-form__checkbox--children'>
-          <input type='checkbox' id='children' name='children' required onClick={() => onWithChildrenClick}/>
+          <input type='checkbox' id='children' name='children' onClick={() => onWithChildrenClick}/>
           <span className='custom-checkbox__icon'>
             <svg width='20' height='17' aria-hidden='true'>
               <use xlinkHref='#icon-tick'></use>
