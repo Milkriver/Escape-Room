@@ -21,11 +21,16 @@ function LoginForm(): JSX.Element {
             <input
               type="email"
               id="email"
-              {...register('email', { required: true })}
-              {...register('email', { required: 'Укажите почту' })}
+              {...register('email', {
+                required: {
+                  value: true,
+                  message: 'Поле не должно быть пустым'
+                },
+              })}
               placeholder="Адрес электронной почты"
               aria-invalid={errors.email ? 'true' : 'false'}
             />
+            {errors.email && errors.email.message as string}
           </div>
           <div className="custom-input login-htmlForm__input">
             <label className="custom-input__label" htmlFor="password">Пароль</label>
@@ -37,7 +42,7 @@ function LoginForm(): JSX.Element {
               {...register('password', {
                 required: {
                   value: true,
-                  message: 'Пароль не должен быть пустым'
+                  message: 'Поле не должно быть пустым'
                 },
                 pattern: {
                   value: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/,
