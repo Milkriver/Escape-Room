@@ -1,7 +1,7 @@
 import BookingForm from '../../components/booking-form/booking-form';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-// import Map from '../../components/map/map';
+import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
 
 function BookingPage(): JSX.Element {
@@ -26,7 +26,7 @@ function BookingPage(): JSX.Element {
           <div className='page-content__item'>
             <div className='booking-map'>
               <div className='map'>
-                {/* <Map coordinates={questBookingSlots.locations[0].coords}/> */}
+                {(questBookingSlots) ? <Map coordinates={questBookingSlots.locations[0].coords}/> : ''}
               </div>
               <p className='booking-map__address'>{questBookingSlots?.locations[0].address}</p>
             </div>
