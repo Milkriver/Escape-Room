@@ -22,6 +22,14 @@ export enum APIRoute {
 }
 
 export const QUEST_CONTACTS_COORDINATES = [59.90840521851865, 30.48297378898692];
+export const CONTACTS = {
+  PHONE: '8 (000) 111-11-11',
+  EMAIL: 'info@escape-room.ru',
+  OPENING: '10:00',
+  CLOSE: '22:00',
+  CITY: 'Санкт-Петербург',
+  ADRESS: 'Набережная реки Карповка, д 5П'
+};
 
 export const TABS = {
   QUESTS: 'Quests',
@@ -107,3 +115,5 @@ export const QUEST_LEVELS = {
   medium: 'Средний',
   hard: 'Сложный'
 };
+
+
