@@ -80,7 +80,7 @@ function BookingForm(): JSX.Element {
         </div>
         <div className='custom-input booking-form__input'>
           <label className='custom-input__label' htmlFor='tel'>Контактный телефон</label>
-          <input type='tel' id='tel' name='tel' placeholder='Телефон' required pattern='[0-9]{10,}' onChange={onPhoneChange} />
+          <input type='tel' id='tel' name='tel' placeholder='Телефон' required pattern='\+7\-[0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{2}' onChange={onPhoneChange} />
         </div>
         <div className='custom-input booking-form__input'>
           <label className='custom-input__label' htmlFor='person'>Количество участников</label>
