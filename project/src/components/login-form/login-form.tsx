@@ -1,45 +1,68 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/user';
 
 function LoginForm(): JSX.Element {
 
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const { register, handleSubmit, formState: { errors } } = useForm<AuthData>();
   const dispatch = useAppDispatch();
+  const onSubmit: SubmitHandler<AuthData> = ( data ) => dispatch(loginAction(data));
+  const handleSubmitVoid = (evt: FormEvent<HTMLFormElement>) => {handleSubmit(onSubmit)(evt);};
 
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
-
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        email: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
-    }
-  };
   return (
-    <form className="login-form" action="#" method="post" onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmitVoid}>
       <div className="login-form__inner-wrapper">
         <h1 className="title title--size-s login-form__title">Вход</h1>
         <div className="login-form__inputs">
           <div className="custom-input login-form__input">
             <label className="custom-input__label" htmlFor="email">E&nbsp;&ndash;&nbsp;mail</label>
-            <input type="email" id="email" name="email" placeholder="Адрес электронной почты" required ref={loginRef} />
+            <input
+              type="email"
+              id="email"
+              {...register('email', {
+                required: {
+                  value: true,
+                  message: 'Поле не должно быть пустым'
+                },
+              })}
+              placeholder="Адрес электронной почты"
+              aria-invalid={errors.email ? 'true' : 'false'}
+            />
+            {errors.email && errors.email.message as string}
           </div>
           <div className="custom-input login-htmlForm__input">
             <label className="custom-input__label" htmlFor="password">Пароль</label>
-            <input type="password" id="password" name="password" placeholder="Пароль" required ref={passwordRef} />
+            <input
+              type="password"
+              id="password"
+              placeholder="Пароль"
+              aria-invalid={errors.password ? 'true' : 'false'}
+              {...register('password', {
+                required: {
+                  value: true,
+                  message: 'Поле не должно быть пустым'
+                },
+                pattern: {
+                  value: /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/,
+                  message: 'Пароль должен состоять минимум из 1 буквы и 1 цифры'
+                }
+              }
+              )}
+            />
+            {errors.password && errors.password.message as string}
           </div>
         </div>
         <button className="btn btn--accent btn--general login-form__submit" type="submit" >Войти</button>
       </div>
       <label className="custom-checkbox login-form__checkbox">
-        <input type="checkbox" id="id-order-agreement" name="user-agreement" required />
+        <input
+          type="checkbox"
+          id="id-order-agreement"
+          name="user-agreement"
+          required
+        />
         <span className="custom-checkbox__icon">
           <svg width="20" height="17" aria-hidden="true">
             <use xlinkHref="#icon-tick"></use>
@@ -52,4 +75,5 @@ function LoginForm(): JSX.Element {
     </form>
   );
 }
+
 export default LoginForm;
